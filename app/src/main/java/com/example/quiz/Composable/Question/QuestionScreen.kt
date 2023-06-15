@@ -1,0 +1,37 @@
+package com.example.quiz.Composable.Question
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.quiz.Model.QuestionList
+import kotlin.random.Random
+
+
+@Composable
+fun QuestionScreen(navController: NavController){
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        QuestionGenerator(getRandomQuestionIndex())
+    }
+}
+
+@Composable
+fun getRandomQuestionIndex(): Int {
+    val listSize = QuestionList.questions.size
+    return Random.nextInt(listSize)
+}
+
+@Composable
+@Preview(showBackground = true)
+fun DetailScreenPreview(){
+    QuestionScreen(
+        navController = rememberNavController()
+    )
+}
