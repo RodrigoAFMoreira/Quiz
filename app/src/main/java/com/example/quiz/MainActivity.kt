@@ -13,9 +13,7 @@ import com.example.quiz.nav.SetupNavRoutes
 import com.example.quiz.ui.theme.QuizTheme
 
 class MainActivity : ComponentActivity() {
-
     lateinit var navController: NavHostController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
