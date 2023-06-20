@@ -29,7 +29,7 @@ object QuestionList {
             id = 4,
             name = "Tom Jobim",
             imageId = R.drawable.tom_jobim,
-            answers = listOf("Raul Seixas", "Sílvio Santos", "Tom Jobin", "Lobão"),
+            answers = listOf("Raul Seixas", "Sílvio Santos", "Tom Jobim", "Lobão"),
             "Tom Jobim"
         ),
         Question(

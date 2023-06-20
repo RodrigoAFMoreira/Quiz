@@ -31,7 +31,7 @@ fun SetupNavRoutes(navController: NavHostController) {
             QuestionScreenFlow(navController = navController)
         }
         composable(route = Screen.Score.route) {
-            ScoreScreen(players = players.take(10)/*, score = score.value*/) //error
+            ScoreScreen(players = players.take(10))
         }
         composable(
             route = Screen.End.route

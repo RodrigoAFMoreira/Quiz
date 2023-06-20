@@ -9,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.quiz.Model.User
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.ui.unit.dp
@@ -45,10 +44,4 @@ fun ScoreScreen(
             }
         }
     }
-}
-
-@Composable
-@Preview(showBackground = true)
-fun ScoreScreenPreview() {
-    ScoreScreenPreview()
 }
