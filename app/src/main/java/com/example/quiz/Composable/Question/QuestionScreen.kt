@@ -42,11 +42,11 @@ fun QuestionScreen(
             )
 
             ImageQuestion(question.imageId)
-            Text(
+            /*Text(
                 text = question.name,
                 modifier = Modifier.padding(bottom = 16.dp),
                 color = Color.White
-            )
+            )*/
 
             // Score text
             Text(
