@@ -72,7 +72,7 @@ fun QuestionScreen(
                 onNextClick = onNextClick,
                 correctAnswer = question.correctAnswer,
                 selectedAnswer = selectedAnswer.value,
-                score = score
+                countScore = score
             )
         }
     }

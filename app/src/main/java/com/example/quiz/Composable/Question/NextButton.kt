@@ -15,13 +15,13 @@ fun NextButton(
     onNextClick: () -> Unit,
     correctAnswer: String,
     selectedAnswer: String,
-    score: MutableState<Int>
+    countScore: MutableState<Int>
 ) {
     Button(
         onClick = {
             val isCorrect = correctAnswer == selectedAnswer
             if (isCorrect) {
-                score.value++
+                countScore.value++
             }
             onNextClick.invoke()
         },
