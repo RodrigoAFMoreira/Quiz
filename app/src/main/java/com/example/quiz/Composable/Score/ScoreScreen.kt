@@ -1,12 +1,7 @@
-package com.example.quiz.Composable
-
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,67 +11,38 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.quiz.Model.User
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.quiz.nav.Screen
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ScoreScreen(navController: NavController) {
-    val scores = generateScores()
-
+fun ScoreScreen(
+    players: List<User>
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        LazyColumn(modifier = Modifier.fillMaxWidth().align(Alignment.TopCenter)) {
-            items(scores) { score ->
+        LazyColumn(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            item {
                 Text(
-                    text = "${score.nome}: ${score.score}",
+                    text = "Ranking",
+                    modifier = Modifier.padding(bottom = 16.dp),
                     color = Color.White,
-                    fontSize = MaterialTheme.typography.body1.fontSize,
-                    fontWeight = FontWeight.Normal,
-                    modifier = Modifier
-                        .clickable {
-                            navController.navigate(Screen.Home.route) {
-                                popUpTo(Screen.Home.route) {
-                                    inclusive = true
-                                }
-                            }
-                        }
-                        .padding(vertical = 4.dp)
+                    style = MaterialTheme.typography.h4,
+                    fontWeight = FontWeight.Bold
                 )
             }
-        }
 
-        Button(
-            onClick = {
-                navController.navigate(Screen.Home.route) {
-                    popUpTo(Screen.Home.route) {
-                        inclusive = true
-                    }
-                }
-            },
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .width(200.dp)
-                .height(50.dp)
-                .padding(vertical = 4.dp),
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color.Black
-            )
-        ) {
-            Text(
-                text = "Voltar",
-                color = Color.White,
-                fontSize = MaterialTheme.typography.h5.fontSize,
-                fontWeight = FontWeight.Bold
-            )
+            itemsIndexed(players) { index, player ->
+                Text(
+                    text = "${index + 1}. ${player.nome} - Score: ${player.score}",
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    color = Color.White,
+                    style = MaterialTheme.typography.h5
+                )
+            }
         }
     }
 }
@@ -84,15 +50,5 @@ fun ScoreScreen(navController: NavController) {
 @Composable
 @Preview(showBackground = true)
 fun ScoreScreenPreview() {
-    ScoreScreen(
-        navController = rememberNavController()
-    )
-}
-
-fun generateScores(): List<User> {
-    val scores = mutableListOf<User>()
-    scores.add(User("name 1", 100))
-    scores.add(User("name 2", 200))
-    scores.add(User("name 3", 300))
-    return scores
+    ScoreScreenPreview()
 }

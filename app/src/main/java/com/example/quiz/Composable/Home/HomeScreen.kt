@@ -12,6 +12,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,7 +27,12 @@ import com.example.quiz.R
 import com.example.quiz.nav.Screen
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    navController: NavController,
+    onNameEntered: (String) -> Unit
+) {
+    val playerName = remember { mutableStateOf("") }
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -43,20 +50,36 @@ fun HomeScreen(navController: NavController) {
                 contentDescription = "Image Quiz",
                 modifier = Modifier.padding(top = 16.dp)
             )
+
             TextField(
-                value = "",
-                onValueChange = { /* t do */ },
-                label = { Text(text = "Entre seu nome") },
+                value = playerName.value,
+                onValueChange = { playerName.value = it },
                 modifier = Modifier.padding(top = 16.dp)
             )
 
+            if (playerName.value.isBlank()) {
+                Text(
+                    text = "Por favor, insira seu nome",
+                    color = Color.Cyan,
+                    fontSize = MaterialTheme.typography.caption.fontSize,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
+
             Button(
-                onClick = { navController.navigate(route = Screen.Questions.route) },
+                onClick = {
+                    if (playerName.value.isNotBlank()) {
+                        onNameEntered(playerName.value)
+                        navController.navigate(Screen.Questions.route)
+                    }
+                },
                 modifier = Modifier
                     .padding(top = 16.dp)
                     .width(200.dp),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Black)
+                    backgroundColor = Color.Black
+                )
             ) {
                 Text(
                     text = "Começar",
@@ -67,15 +90,16 @@ fun HomeScreen(navController: NavController) {
             }
 
             Button(
-                onClick = { navController.navigate(route = Screen.Score.route) },
+                onClick = { navController.navigate(Screen.Score.route) },
                 modifier = Modifier
                     .padding(top = 16.dp)
                     .width(200.dp),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Black)
+                    backgroundColor = Color.Black
+                )
             ) {
                 Text(
-                    text = "Placar",
+                    text = "Pontuação",
                     color = Color.White,
                     fontSize = MaterialTheme.typography.h5.fontSize,
                     fontWeight = FontWeight.Bold
@@ -85,10 +109,12 @@ fun HomeScreen(navController: NavController) {
     }
 }
 
+
 @Composable
 @Preview(showBackground = true)
 fun HomeScreenPreview() {
     HomeScreen(
-        navController = rememberNavController()
+        navController = rememberNavController(),
+        onNameEntered = {}
     )
 }

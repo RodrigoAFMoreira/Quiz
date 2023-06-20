@@ -25,8 +25,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
-import com.example.quiz.Composable.ScoreScreen
+import androidx.navigation.NavController
+import com.example.quiz.Composable.QuizEnd.EndQuizScreen
 import com.example.quiz.Model.Question
 import com.example.quiz.Model.QuestionList
 
@@ -109,7 +109,7 @@ fun ImageForAnswer(imageResId: Int) {
 }
 
 @Composable
-fun QuestionScreenFlow() {
+fun QuestionScreenFlow(navController: NavController) {
     val questions = QuestionList.questions.shuffled().take(5)
     val currentQuestionIndex = remember { mutableStateOf(0) }
 
@@ -119,7 +119,7 @@ fun QuestionScreenFlow() {
             onNextClick = { currentQuestionIndex.value++ }
         )
     } else {
-        ScoreScreen(navController = rememberNavController())
+        EndQuizScreen(navController)
     }
 }
 
@@ -178,4 +178,3 @@ fun NextButton(
         )
     }
 }
-
